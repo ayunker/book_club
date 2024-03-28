@@ -1,0 +1,14 @@
+<h1>New Book</h1>
+
+<%= turbo_frame_tag "new_book", target: "_top" do %>
+  <%= form_with(model: [@book.meeting, @book]) do |form| %>
+    <div class="field">
+      <%= form.text_field :title %>
+      <%= form.text_field :author %>
+      <%= form.text_field :description %>
+      <%= form.submit "Send" %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= link_to "back", @book.meeting %>

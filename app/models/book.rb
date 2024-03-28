@@ -8,6 +8,9 @@ class Book < ApplicationRecord
 
   before_validation :set_slug
 
+  after_create_commit -> { broadcast_append_to meeting }
+  after_update_commit -> { broadcast_replace_to meeting }
+
   private
 
   def set_slug

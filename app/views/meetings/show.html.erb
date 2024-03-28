@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>c'est bon!</p>
+
+<%= turbo_stream_from @meeting %>
+
+<div id="books">
+  <%= render @meeting.books %>
+</div>
+
+<%= turbo_frame_tag "new_book", src: new_meeting_book_path(@meeting), target: "_top" %>
