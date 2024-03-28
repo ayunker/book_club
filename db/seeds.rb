@@ -6,17 +6,21 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+meet = Meeting.create(name: "April")
+
 Book.create([
   {
     title: "The Fury",
     author: "Alex Michaelides",
-    description: "it a book"
+    description: "it a book",
+    meeting: meet
   },
 
   {
     title: "The Silent Patient",
     author: "Alex Michaelides",
     description: "it another book",
-    votes: 0
+    votes: 0,
+    meeting: meet
   }
 ])
