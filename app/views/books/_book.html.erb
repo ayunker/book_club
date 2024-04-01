@@ -3,12 +3,12 @@
   <p><%= book.author %></p>
   <p><%= link_to("📘 goodreads", book.url) %></p>
 
-  <div class="mt-2">
-    <p>Votes: <%= book.votes.count %></p>
+  <div class="mt-2 flex">
+    <p class="flex-1">Votes: <%= book.votes.count %></p>
     <form action="/votes" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <input type="hidden" name="book[id]" value="<%= book.id %>">
-      <input type="submit" value="voat!">
+      <input type="submit" value="voat!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
     </form>
   </div>
 </div>
