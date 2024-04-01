@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :meetings do
     resources :books
   end
+
+  resources :votes, only: [:create, :destroy]
 end

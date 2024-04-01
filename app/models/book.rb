@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :meeting, dependent: :destroy
+  has_many :votes
 
   validates :title, presence: true
   validates :slug, presence: true
