@@ -1,7 +1,7 @@
 <div id="<%= dom_id(book) %>" class="border border-slate-500 rounded-lg justify-center mb-4 p-4">
   <h2 class="font-bold mb-1" ><%= book.title %></h2>
   <p><%= book.author %></p>
-  <p><%= book.description %></p>
+  <p><%= link_to("📘 goodreads", book.url) %></p>
 
   <div class="mt-2">
     <p>Votes: <%= book.votes.count %></p>

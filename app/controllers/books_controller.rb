@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :slug, :author, :description)
+    params.require(:book).permit(:title, :slug, :author, :url)
   end
 
   def set_meeting
