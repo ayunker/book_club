@@ -4,6 +4,11 @@ class MeetingsController < ApplicationController
   def show
   end
 
+  def current
+    @meeting = Meeting.order(id: :desc).first
+    redirect_to @meeting
+  end
+
   private
 
   def set_meeting
