@@ -1,4 +1,6 @@
-<div id="<%= dom_id(book) %>" class="border border-slate-500 rounded-lg justify-center mb-4 p-4">
+<% user_ref = request.session_options.to_hash[:id].to_s %>
+
+<div id="<%= dom_id(book) %>" class="border border-slate-500 rounded-lg justify-center mb-4 p-4 <%= book.voted_by?(user_ref) && "bg-green-200" %>">
   <h2 class="font-bold mb-1" ><%= book.title %></h2>
   <p><%= book.author %></p>
   <p><%= link_to("📘 goodreads", book.url) %></p>

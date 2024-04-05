@@ -12,6 +12,10 @@ class Book < ApplicationRecord
   after_create_commit -> { broadcast_append_to meeting }
   after_update_commit -> { broadcast_replace_to meeting }
 
+  def voted_by?(user_ref)
+    votes.pluck(:user_ref).include?(user_ref)
+  end
+
   private
 
   def set_slug
