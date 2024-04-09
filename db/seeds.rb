@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # meet = Meeting.create(name: "April")
-meet = Meeting.find_by(name: "April")
+meet = Meeting.find_or_create_by(name: "April")
 
 Book.create([
   {
