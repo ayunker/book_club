@@ -1,21 +1,21 @@
 <% user_ref = request.session_options.to_hash[:id].to_s %>
 <% vote = book.votes.find_by(user_ref:) %>
 
-<div id="<%= dom_id(book) %>" class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4 <%= vote && "bg-green-200" %>">
+<div id="<%= dom_id(book) %>" class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4 <%= vote && "bg-green-200 text-black" %>">
   <h2 class="font-bold mb-1" ><%= book.title %></h2>
   <p><%= book.author %></p>
-  <p><%= link_to("📘 goodreads", book.url) %></p>
+  <p><%= link_to("📘 goodreads description", book.url, target: "_blank") %></p>
 
   <div class="mt-2 flex">
     <p class="flex-1">Votes: <%= book.votes.count %></p>
     <% if book.voted_by?(user_ref) %>
       <form action="<%= vote_path(vote) %>" method="delete">
-        <input type="submit" value="un-voat!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <input type="submit" value="un-vote!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       </form>
     <% else %>
       <form action="/votes" method="post">
         <input type="hidden" name="book[id]" value="<%= book.id %>">
-        <input type="submit" value="voat!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <input type="submit" value="vote!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       </form>
     <% end %>
   </div>
