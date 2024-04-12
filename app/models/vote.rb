@@ -17,10 +17,7 @@
 #  fk_rails_...  (book_id => books.id)
 #
 class Vote < ApplicationRecord
-  belongs_to :book
+  belongs_to :book, touch: true
 
   validates :user_ref, presence: true
-
-  after_create_commit -> { book.touch }
-  after_destroy_commit -> { book.touch }
 end
