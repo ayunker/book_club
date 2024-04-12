@@ -21,3 +21,9 @@ outdated: ## Shows outdated packages.
 
 routes:
 	bin/rails routes
+
+deploy:
+	git push heroku main
+
+hmigrate:
+	heroku run rails db:migrate
