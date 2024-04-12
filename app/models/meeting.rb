@@ -20,6 +20,6 @@ class Meeting < ApplicationRecord
   private
 
   def set_slug
-    self.slug = name.downcase.tr(" ", "-")
+    self.slug = name.parameterize
   end
 end

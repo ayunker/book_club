@@ -40,7 +40,6 @@ class Book < ApplicationRecord
   private
 
   def set_slug
-    # TODO: there's probably a better way of doing substitution
-    self.slug = title.downcase.tr(" ", "-")
+    self.slug = title.parameterize
   end
 end
