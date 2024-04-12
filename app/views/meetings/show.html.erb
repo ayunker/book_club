@@ -6,5 +6,5 @@
 <%= turbo_stream_from @meeting %>
 
 <div id="books">
-  <%= render @meeting.books %>
+  <%= render @meeting.books.order(:id) %>
 </div>
