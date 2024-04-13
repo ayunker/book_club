@@ -1,0 +1,6 @@
+<% @meetings.each do |meeting| %>
+  <div id="<%= dom_id(meeting) %>" class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
+    <h2 class="font-bold mb-1" ><%= meeting.name %></h2>
+    <p><%= link_to("entre", meeting_path(meeting)) =%></p>
+  </div>
+<% end %>
