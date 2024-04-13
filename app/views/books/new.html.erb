@@ -1,14 +1,25 @@
 <h1>New Book</h1>
 
 <%= turbo_frame_tag "new_book", target: "_top" do %>
+  <div class=" md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
   <%= form_with(model: [@book.meeting, @book]) do |form| %>
-    <div class="field">
-      <%= form.text_field :title %>
-      <%= form.text_field :author %>
-      <%= form.text_field :url %>
-      <%= form.submit "Send" %>
+    <div class="field mb-4">
+      <%= form.label :title, "Title", class: "block" %>
+      <%= form.text_field :title, class: "block" %>
+    </div>
+    <div class="field mb-4">
+      <%= form.label :author, "Author", class: "block" %>
+      <%= form.text_field :author, class: "block" %>
+      </div>
+    <div class="field mb-4">
+      <%= form.label :url, "Link to Goodreads", class: "block" %>
+      <%= form.text_field :url, class: "block" %>
+    </div>
+    <div>
+      <%= form.submit "Add Book", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" %>
     </div>
   <% end %>
+  </div>
 <% end %>
 
 <%= link_to "back", @book.meeting %>

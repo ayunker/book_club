@@ -22,3 +22,9 @@ body {
 a {
    color: #00A6FB;
 }
+
+input[type="text"], textarea {
+
+  background-color : #423c75; 
+
+}

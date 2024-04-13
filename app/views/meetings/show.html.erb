@@ -5,6 +5,11 @@
 
 <%= turbo_stream_from @meeting %>
 
-<div id="books">
+<div id="books" class="items-center justify-center">
   <%= render @meeting.books.order(:id) %>
 </div>
+
+
+<% if @edit_mode %>
+  <%= turbo_frame_tag "new_book", src: new_meeting_book_path(@meeting), target: "_top" %>
+<% end %>
