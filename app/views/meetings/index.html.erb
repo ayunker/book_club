@@ -4,3 +4,5 @@
     <p><%= link_to("entre", meeting_path(meeting)) =%></p>
   </div>
 <% end %>
+
+<%= turbo_frame_tag "new_meeting", src: new_meeting_path, target: "_top" %>

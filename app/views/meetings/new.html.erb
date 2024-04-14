@@ -1,0 +1,15 @@
+<h1>New Meeting</h1>
+
+<%= turbo_frame_tag "new_meeting", target: "_top" do %>
+  <div class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
+    <%= form_with(model: @meeting) do |form| %>
+      <div class="field mb-4">
+        <%= form.label :name, "Name", class: "block" %>
+        <%= form.text_field :name, class: "block" %>
+      </div>
+      <div>
+        <%= form.submit "Add Meeting", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

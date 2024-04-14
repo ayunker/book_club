@@ -5,6 +5,16 @@ class MeetingsController < ApplicationController
     @meetings = Meeting.all
   end
 
+  def new
+    @meeting = Meeting.new
+  end
+
+  def create
+    @meeting = Meeting.create!(meeting_params)
+
+    redirect_to meeting_path(@meeting, edit: true)
+  end
+
   def show
     @edit_mode = true if params[:edit]
   end
@@ -15,6 +25,10 @@ class MeetingsController < ApplicationController
   end
 
   private
+
+  def meeting_params
+    params.require(:meeting).permit(:name)
+  end
 
   def set_meeting
     @meeting = Meeting.find(params[:id])
