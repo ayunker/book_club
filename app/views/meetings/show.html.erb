@@ -10,6 +10,4 @@
 </div>
 
 
-<% if @edit_mode %>
-  <%= turbo_frame_tag "new_book", src: new_meeting_book_path(@meeting), target: "_top" %>
-<% end %>
+<%= turbo_frame_tag "new_book", src: new_meeting_book_path(@meeting), target: "_top" %>
