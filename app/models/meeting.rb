@@ -21,6 +21,10 @@ class Meeting < ApplicationRecord
     books.left_joins(:votes).group(:id).order("count(books.id) desc").first
   end
 
+  def previous_month
+    Meeting.find_by(id: id - 1)
+  end
+
   private
 
   def set_slug
