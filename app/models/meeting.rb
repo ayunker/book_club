@@ -17,6 +17,10 @@ class Meeting < ApplicationRecord
 
   before_save :set_slug
 
+  def leading_book
+    books.left_joins(:votes).group(:id).order("count(books.id) desc").first
+  end
+
   private
 
   def set_slug

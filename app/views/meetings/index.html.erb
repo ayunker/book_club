@@ -1,6 +1,9 @@
 <% @meetings.each do |meeting| %>
   <div id="<%= dom_id(meeting) %>" class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
     <h2 class="font-bold mb-1" ><%= meeting.name %></h2>
+    <p> Number of Books: <%= meeting.books.count %></p>
+    <p> Number of Votes: <%= meeting.books.map { _1.votes.count }.sum %></p>
+    <p> Leader: <%= meeting.leading_book&.title %></p>
     <p><%= link_to("entre", meeting_path(meeting)) =%></p>
   </div>
 <% end %>
