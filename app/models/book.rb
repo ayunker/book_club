@@ -37,6 +37,10 @@ class Book < ApplicationRecord
     votes.pluck(:user_ref).include?(user_ref)
   end
 
+  def can_receive_vote?(user_ref)
+    meeting.books.includes(:votes).map { _1.voted_by?(user_ref) }.none?
+  end
+
   private
 
   def set_slug

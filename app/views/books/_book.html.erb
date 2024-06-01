@@ -12,7 +12,7 @@
       <form action="<%= vote_path(vote) %>" method="delete">
         <input type="submit" value="un-vote!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       </form>
-    <% else %>
+    <% elsif book.can_receive_vote?(user_ref) %>
       <form action="/votes" method="post">
         <input type="hidden" name="book[id]" value="<%= book.id %>">
         <input type="submit" value="vote!" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
