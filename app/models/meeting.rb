@@ -22,7 +22,7 @@ class Meeting < ApplicationRecord
   end
 
   def previous_month
-    Meeting.find_by(id: id - 1)
+    Meeting.where(id: Float::INFINITY...id).max
   end
 
   private
