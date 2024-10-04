@@ -4,6 +4,12 @@
 <p class="text-center">Cast your vote for next month's book below!</p>
 <p class="text-center mb-4"><em>Choose wisely.</em></p>
 
+<div class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
+  <% last_months_book = @meeting.previous_month.leading_book %>
+  <h1>Last month's pick:</h1>
+  <p><%= link_to(last_months_book.title, last_months_book.url, target: "_blank") %></p>
+</div>
+
 <%= turbo_stream_from @meeting %>
 
 <div id="books" class="items-center justify-center">
