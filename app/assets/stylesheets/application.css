@@ -23,6 +23,11 @@ a {
    color: #00A6FB;
 }
 
+h1 a {
+   text-decoration: none;
+   color: #CCE3DE;
+}
+
 input[type="text"], textarea {
 
   background-color : #423c75; 
