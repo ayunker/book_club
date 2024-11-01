@@ -2,7 +2,7 @@
 #
 # Table name: votes
 #
-#  id         :bigint           not null, primary key
+#  id         :integer          not null, primary key
 #  user_ref   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -14,7 +14,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (book_id => books.id)
+#  book_id  (book_id => books.id)
 #
 class Vote < ApplicationRecord
   belongs_to :book, touch: true
