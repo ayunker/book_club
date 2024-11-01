@@ -2,7 +2,7 @@
 #
 # Table name: books
 #
-#  id         :bigint           not null, primary key
+#  id         :integer          not null, primary key
 #  author     :string           not null
 #  slug       :string           not null
 #  title      :string           not null
@@ -17,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (meeting_id => meetings.id)
+#  meeting_id  (meeting_id => meetings.id)
 #
 class Book < ApplicationRecord
   belongs_to :meeting
