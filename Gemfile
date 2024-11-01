@@ -5,6 +5,7 @@ ruby "3.2.0"
 
 # Use specific branch of Rails
 gem "rails", github: "rails/rails", branch: "8-0-stable"
+gem "solid_cable"
 
 gem "sqlite3", ">= 1.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
