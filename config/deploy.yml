@@ -1,98 +1,85 @@
-# Name of your application. Used to uniquely configure containers.
-service: my-app
+service: book-club
 
-# Name of the container image.
-image: my-user/my-app
+image: tonyyunker/book-club
 
-# Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
-  # job:
-  #   hosts:
-  #     - 192.168.0.1
-  #   cmd: bin/jobs
+    hosts:
+      - 64.225.62.74
+    # labels:
+    #   traefik.http.routers.nazgul-on-rails.entrypoints: websecure
+    #   traefik.http.routers.nazgul-on-rails.rule: Host(`465book.club`)
+    #   traefik.http.routers.nazgul-on-rails.tls.certresolver: letsencrypt
 
-# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
-# Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
-#
-# Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption. 
-proxy: 
-  ssl: true
-  host: app.example.com
-  # Proxy connects to your container on port 80 by default.
-  # app_port: 3000
-
-# Credentials for your image host.
 registry:
-  # Specify the registry server, if you're not using Docker Hub
-  # server: registry.digitalocean.com / ghcr.io / ...
-  username: my-user
+  username: tonyyunker
 
-  # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# Configure builder setup.
-builder:
-  arch: amd64
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  clear:
+    RUBY_YJIT_ENABLE: 1
+    RAILS_SERVE_STATIC_FILES: true
+  secret:
+    - RAILS_MASTER_KEY
 
-# Inject ENV variables into containers (secrets come from .kamal/secrets).
-#
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+volumes:
+  - "data:/data"
 
-# Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
-# "bin/kamal logs -r job" will tail logs from the first server in the job section.
-#
-# aliases:
-#   shell: app exec --interactive --reuse "bash"
 
-# Use a different ssh user than root
-#
-# ssh:
-#   user: app
+# Configure custom arguments for Traefik. Be sure to reboot traefik when you modify it.
+# traefik:
+#   options:
+#     publish:
+#       - "443:443"
+#     volume:
+#       - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+#   args:
+#     entryPoints.web.address: ":80"
+#     entryPoints.websecure.address: ":443"
+#     entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
+#     entryPoints.web.http.redirections.entryPoint.scheme: https
+#     entryPoints.web.http.redirections.entrypoint.permanent: true
+#     certificatesResolvers.letsencrypt.acme.email: "tony.yunker@gmail.com"
+#     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" # Must match the path in `volume`
+#     certificatesResolvers.letsencrypt.acme.httpchallenge: true
+#     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`
 
-# Use a persistent storage volume.
-#
-# volumes:
-#   - "app_storage:/app/storage"
+
+  # args:
+  #   accesslog: true
+  #   accesslog.format: json
+
+# Configure a custom healthcheck (default is /up on port 3000)
+# healthcheck:
+#   path: /healthz
+#   port: 4000
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
 # version inside the asset_path.
 #
-# asset_path: /app/public/assets
+# If your app is using the Sprockets gem, ensure it sets `config.assets.manifest`.
+# See https://github.com/basecamp/kamal/issues/626 for details
+#
+# asset_path: /rails/public/assets
 
 # Configure rolling deploys by setting a wait time between batches of restarts.
-#
 # boot:
 #   limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
 #   wait: 2
 
-# Use accessory services (secrets come from .kamal/secrets).
+# Configure the role used to determine the primary_host. This host takes
+# deploy locks, runs health checks during the deploy, and follow logs, etc.
 #
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     port: 3306
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: valkey/valkey:8
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
+# Caution: there's no support for role renaming yet, so be careful to cleanup
+#          the previous role on the deployed hosts.
+# primary_role: web
+
+# Controls if we abort when see a role with no hosts. Disabling this may be
+# useful for more complex deploy configurations.
+#
+# allow_empty_roles: false
