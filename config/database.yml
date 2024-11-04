@@ -17,7 +17,7 @@ production:
   primary:
     <<: *default
     database: /data/production_book_club.sqlite3
-  cable:
-    <<: *default
-    database: /data/production_cable.sqlite3
-    migrations_paths: db/cable_migrate
+  # cable:
+  #   <<: *default
+  #   database: /data/production_cable.sqlite3
+  #   migrations_paths: db/cable_migrate
