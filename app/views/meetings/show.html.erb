@@ -5,9 +5,9 @@
 <p class="text-center mb-4"><em>Choose wisely.</em></p>
 
 <div class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
-  <% last_months_book = @meeting.previous_month.leading_book %>
+  <% last_months_title = @meeting.previous_month&.leading_book&.title %>
   <h1>Last month's pick:</h1>
-  <p>Rules Of Civility</p>
+  <p> <%= last_months_title || "...???..." %> </p>
 </div>
 
 <%= turbo_stream_from @meeting %>
