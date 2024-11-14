@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: %i[show]
+  before_action :set_meeting, only: %i[show update]
 
   def index
     @meetings = Meeting.all
@@ -17,6 +17,10 @@ class MeetingsController < ApplicationController
 
   def show
     @edit_mode = true if params[:edit]
+  end
+
+  def update
+    @meeting.toggle_lock!
   end
 
   def current

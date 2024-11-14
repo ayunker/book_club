@@ -38,6 +38,7 @@ class Book < ApplicationRecord
   end
 
   def can_receive_vote?(user_ref)
+    return false if meeting.locked?
     meeting.books.includes(:votes).map { _1.voted_by?(user_ref) }.none?
   end
 

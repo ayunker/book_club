@@ -3,8 +3,14 @@
     <h2 class="font-bold mb-1" ><%= meeting.name %></h2>
     <p> Number of Books: <%= meeting.books.count %></p>
     <p> Number of Votes: <%= meeting.books.map { _1.votes.count }.sum %></p>
-    <p> Leader: <%= meeting.leading_book&.title %></p>
-    <p><%= link_to("entre", meeting_path(meeting)) =%></p>
+    <div class="mt-2 flex">
+      <p class="flex-1"><%= link_to("entre", meeting_path(meeting)) =%></p>
+      <%= form_with(model: meeting, method: :patch) do |form| %>
+        <% # TODO: this could be turbo'd %>
+        <% submit_text = meeting.locked? ? "🔓" : "🔒" %>
+        <%= form.submit(submit_text, class: "flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full") %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 

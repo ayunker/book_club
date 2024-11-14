@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_04_12_195316) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_14_204853) do
   create_table "books", force: :cascade do |t|
     t.string "title", null: false
     t.string "author", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_04_12_195316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", null: false
+    t.datetime "locked_at"
     t.index ["slug"], name: "index_meetings_on_slug", unique: true
   end
 
