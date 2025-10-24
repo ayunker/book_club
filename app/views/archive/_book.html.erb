@@ -1,0 +1,7 @@
+<div class="md:w-6/12 border border-slate-500 rounded-lg justify-center mb-4 p-4">
+  <h2 class="font-bold mb-1" ><%= locals[:title] %></h2>
+  <p><%= locals[:author] %></p>
+  <% if locals[:url].present? %>
+    <p><%= link_to("📘 goodreads description", locals[:url], target: "_blank") %></p>
+  <% end %>
+</div>

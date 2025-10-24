@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   # Defines the root path route ("/")
-  root "meetings#current"
+  root "archive#index"
 
   resources :meetings do
     resources :books
   end
+
+  resources :archive, only: [:index]
 
   resources :votes, only: [:create, :destroy]
 end
