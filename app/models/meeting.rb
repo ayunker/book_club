@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: meetings
-#
-#  id         :integer          not null, primary key
-#  locked_at  :datetime
-#  name       :string
-#  slug       :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_meetings_on_slug  (slug) UNIQUE
-#
 class Meeting < ApplicationRecord
   has_many :books, dependent: :destroy
 

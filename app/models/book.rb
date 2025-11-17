@@ -1,24 +1,3 @@
-# == Schema Information
-#
-# Table name: books
-#
-#  id         :integer          not null, primary key
-#  author     :string           not null
-#  slug       :string           not null
-#  title      :string           not null
-#  url        :string           default(""), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  meeting_id :bigint           not null
-#
-# Indexes
-#
-#  index_books_on_meeting_id  (meeting_id)
-#
-# Foreign Keys
-#
-#  meeting_id  (meeting_id => meetings.id)
-#
 class Book < ApplicationRecord
   belongs_to :meeting
   has_many :votes, dependent: :destroy
