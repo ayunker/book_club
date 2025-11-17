@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.4.7"
 
 # Use specific branch of Rails
-gem "rails", "~> 8.0.1"
+gem "rails", "~> 8.1.1"
 gem "solid_cable"
 
 gem "kamal", "~> 1.8.1"
